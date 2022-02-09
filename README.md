@@ -1,2 +1,3 @@
 # memory-game
-JS based memory based.
+
+JS based memory game.
