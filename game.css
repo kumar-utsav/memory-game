@@ -5,3 +5,32 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+}
+
+.wrapper {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 20px;
+  grid-auto-rows: minmax(150px, auto);
+  padding: 20px;
+  background-color: #1b202591;
+  border-radius: 4px;
+  box-shadow: 8px 8px 20px 0 #2e3d4980;
+}
+
+.wrapper .card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 150px;
+  border-radius: 4px;
+  background: #141214;
+  cursor: pointer;
+}
