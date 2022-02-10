@@ -34,3 +34,8 @@ body {
   background: #141214;
   cursor: pointer;
 }
+
+.wrapper .card .fa {
+  color: white;
+  font-size: 50px;
+}
