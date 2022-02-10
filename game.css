@@ -23,6 +23,7 @@ body {
   background-color: #1b202591;
   border-radius: 4px;
   box-shadow: 8px 8px 20px 0 #2e3d4980;
+  perspective: 600px; /*This is to add the 3D effect. Smaller the value, larger the effect*/
 }
 
 .wrapper .card {
@@ -31,11 +32,30 @@ body {
   justify-content: center;
   width: 150px;
   border-radius: 4px;
-  background: #141214;
   cursor: pointer;
+  position: relative;
+  transition: transform 0.4s ease-in-out; /* This provides the transition effect.*/
+  transform-style: preserve-3d; /* Child elements are in 3D space */
 }
 
-.wrapper .card .fa {
+.wrapper .card .front,
+.wrapper .card .back {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backface-visibility: hidden; /* This is to hide the backside when the element is rotated. */
+}
+
+.wrapper .card .front {
+  background: #141214;
+}
+
+.wrapper .card .back {
+  background: #02b3e4;
   color: white;
   font-size: 50px;
+  transform: rotateY(180deg);
 }
