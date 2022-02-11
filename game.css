@@ -128,3 +128,13 @@ body {
 .wrapper .card .back.background--green {
   background: #55f720;
 }
+
+@media (max-width: 400px) {
+  .wrapper {
+    grid-auto-rows: minmax(65px, auto);
+  }
+
+  .wrapper .card {
+    width: 65px;
+  }
+}
