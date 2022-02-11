@@ -18,7 +18,7 @@ body {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-gap: 20px;
-  grid-auto-rows: minmax(150px, auto);
+  grid-auto-rows: minmax(100px, auto);
   padding: 20px;
   background-color: #1b202591;
   border-radius: 4px;
@@ -30,7 +30,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 150px;
+  width: 100px;
   border-radius: 4px;
   cursor: pointer;
   position: relative;
@@ -56,6 +56,75 @@ body {
 .wrapper .card .back {
   background: #02b3e4;
   color: white;
-  font-size: 50px;
+  font-size: 40px;
   transform: rotateY(180deg);
+}
+
+.flip {
+  transform: rotateY(180deg);
+}
+
+/* https://github.com/animate-css/animate.css/blob/main/source/attention_seekers/rubberBand.css */
+@keyframes rubberBand {
+  from {
+    transform: scale3d(1, 1, 1);
+  }
+
+  30% {
+    transform: scale3d(1.25, 0.75, 1);
+  }
+
+  40% {
+    transform: scale3d(0.75, 1.25, 1);
+  }
+
+  50% {
+    transform: scale3d(1.15, 0.85, 1);
+  }
+
+  65% {
+    transform: scale3d(0.95, 1.05, 1);
+  }
+
+  75% {
+    transform: scale3d(1.05, 0.95, 1);
+  }
+
+  to {
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+/* https://github.com/animate-css/animate.css/blob/main/source/attention_seekers/pulse.css */
+@keyframes pulse {
+  from {
+    transform: scale3d(1, 1, 1);
+  }
+
+  50% {
+    transform: scale3d(1.05, 1.05, 1.05);
+  }
+
+  to {
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+.pulse {
+  animation-name: pulse;
+  animation-timing-function: ease-in-out;
+  animation-duration: 1s;
+}
+
+.rubberBand {
+  animation-name: rubberBand;
+  animation-duration: 1s;
+}
+
+.wrapper .card .back.background--red {
+  background: #e2043b;
+}
+
+.wrapper .card .back.background--green {
+  background: #55f720;
 }
