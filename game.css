@@ -14,7 +14,7 @@ body {
   width: 100vw;
 }
 
-.wrapper {
+.deck {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-gap: 20px;
@@ -26,7 +26,7 @@ body {
   perspective: 600px; /*This is to add the 3D effect. Smaller the value, larger the effect*/
 }
 
-.wrapper .card {
+.deck .card {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -38,8 +38,8 @@ body {
   transform-style: preserve-3d; /* Child elements are in 3D space */
 }
 
-.wrapper .card .front,
-.wrapper .card .back {
+.deck .card .front,
+.deck .card .back {
   position: absolute;
   height: 100%;
   width: 100%;
@@ -47,13 +47,14 @@ body {
   align-items: center;
   justify-content: center;
   backface-visibility: hidden; /* This is to hide the backside when the element is rotated. */
+  border-radius: 4px;
 }
 
-.wrapper .card .front {
+.deck .card .front {
   background: #141214;
 }
 
-.wrapper .card .back {
+.deck .card .back {
   background: #02b3e4;
   color: white;
   font-size: 40px;
@@ -121,20 +122,43 @@ body {
   animation-duration: 1s;
 }
 
-.wrapper .card .back.background--red {
+.deck .card .back.background--red {
   background: #e2043b;
 }
 
-.wrapper .card .back.background--green {
+.deck .card .back.background--green {
   background: #55f720;
 }
 
 @media (max-width: 400px) {
-  .wrapper {
+  .deck {
     grid-auto-rows: minmax(65px, auto);
   }
 
-  .wrapper .card {
+  .deck .card {
     width: 65px;
   }
+}
+
+.stats {
+  display: flex;
+  padding: 20px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 24px;
+  font-family: cursive;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.fa-redo {
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.header {
+  font-family: cursive;
+  text-align: center;
+  font-size: 50px;
+  margin-bottom: 20px;
 }

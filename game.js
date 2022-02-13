@@ -1,25 +1,53 @@
 let cards = [...document.querySelectorAll('.card')];
+let timer = -1;
 
-cards = shuffle(cards);
+let firstCard,
+  secondCard,
+  moves = 0;
 
-let firstCard, secondCard;
+const deck = document.querySelector('.deck');
 
-const wrapper = document.querySelector('.wrapper');
+const mins = document.querySelector('.mins');
 
-wrapper.innerHTML = null;
+const secs = document.querySelector('.secs');
 
-cards.forEach((card) => {
-  card.addEventListener('click', (event) => {
-    const target = event.target;
-    const parent = target['parentElement'];
+const resetButton = document.querySelector('.fa-redo');
 
-    handleCardClick(parent);
+resetButton.addEventListener('click', reset);
+
+function setupDeck() {
+  deck.innerHTML = null;
+
+  cards = shuffle(cards);
+
+  cards.forEach((card) => {
+    card.className = 'card';
+
+    card.querySelector('.front').className = 'front';
+
+    const backEle = card.querySelector('.back');
+
+    backEle.classList.remove('pulse');
+    backEle.classList.remove('rubberBand');
+    backEle.classList.remove('background--red');
+    backEle.classList.remove('background--green');
+
+    card.addEventListener('click', (event) => {
+      const target = event.target;
+      const parent = target['parentElement'];
+
+      handleCardClick(parent);
+    });
+
+    deck.appendChild(card);
   });
-
-  wrapper.appendChild(card);
-});
+}
 
 function handleCardClick(card) {
+  if (timer === -1) {
+    startTimer();
+  }
+
   if (card.classList.contains('clicked')) {
     return;
   }
@@ -38,6 +66,8 @@ function handleCardClick(card) {
 
   secondCard = card;
 
+  setMoveCount();
+
   toggleClickClasses(secondCard);
 
   const firstCardValue = firstCard.dataset.value;
@@ -47,6 +77,10 @@ function handleCardClick(card) {
     handleMatch();
   } else {
     handleNoMatch();
+  }
+
+  if (document.querySelectorAll('.clicked').length === 16) {
+    stopTimer();
   }
 }
 
@@ -126,3 +160,42 @@ function shuffle(array) {
   }
   return array;
 }
+
+function setMoveCount(reset) {
+  moves = reset ? 0 : moves + 1;
+  document.querySelector('.moves').innerHTML = `${moves} Move(s)`;
+}
+
+function startTimer() {
+  let minsCounter = 0;
+  let secsCounter = 0;
+
+  timer = setInterval(() => {
+    if (secsCounter === 60) {
+      secsCounter = 0;
+      mins.innerHTML = `${++minsCounter} Mins`;
+    }
+
+    secs.innerHTML = `${++secsCounter} Secs`;
+  }, 1000);
+}
+
+function stopTimer() {
+  clearInterval(timer);
+}
+
+function reset() {
+  firstCard = null;
+  secondCard = null;
+
+  setupDeck();
+
+  setMoveCount(true);
+
+  clearInterval(timer);
+  timer = -1;
+  mins.innerHTML = `0 Mins`;
+  secs.innerHTML = `0 Secs`;
+}
+
+setupDeck();
